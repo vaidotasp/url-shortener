@@ -56,18 +56,19 @@ app.get('/new/:url*', function(req, res) {
     for (let i = 0; i < data.length; i++) {
       if (data[i].url === inputUrl) {
         console.log('url already exists, here is the original output')
+        res.send(data[i].output)
         break
       } else if (inputUrl !== data[i].url && i === data.length - 1) {
         console.log('url does not exist, we will have to create one')
         let o = new NewUrl(inputUrl)
-        console.log(o.id)
-        data[2] = o
         console.log('object created')
+        data.push(o)
+        res.send(data[i].output)
         break
       }
     }
     //console.log(data)
-    console.log(data)
+    console.log(JSON.stringify(data))
   }
 })
 
