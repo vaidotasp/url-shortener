@@ -1,6 +1,4 @@
 const express = require('express')
-//const mongodb = require('mongodb')
-
 const app = express()
 //REGEX for URL validation
 const re = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
@@ -9,7 +7,7 @@ let data = [
   {
     id: 1234,
     url: 'www.example.com',
-    output: 'www.url-short.com/1234'
+    output: 'http://www.google.com' //important to use http:// for the redirect to work
   },
   {
     id: 1999,
@@ -18,20 +16,11 @@ let data = [
   }
 ]
 
-// function NewUrl(url) {
-//   this.id = Math.floor(1000 + Math.random() * 9000)
-//   this.url = url
-//   this.output = 'static/' + this.id
-// }
-
 function NewUrl(url) {
   this.id = Math.floor(1000 + Math.random() * 9000)
   this.url = url
   this.output = 'static/' + this.id
 }
-
-// let f = new NewUrl('www.miimimi.com')
-// console.log(f)
 
 app.get('/', function(req, res) {
   res.send('works')
@@ -39,9 +28,11 @@ app.get('/', function(req, res) {
 
 //this should handle the redirect of the short URL id only
 app.get('/:id', function(req, res) {
-  //need to take the ID, check if it exists in DB, and redirect if it does
-  //if it does not, do nothing and end response
-  res.send(req.params.id)
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].id === Number(req.params.id)) {
+      res.redirect(data[i].output) //important to use http:// for the redirect to work
+    }
+  }
 })
 
 //This should handle the new URL-Short requests only
@@ -67,7 +58,6 @@ app.get('/new/:url*', function(req, res) {
         break
       }
     }
-    //console.log(data)
     console.log(JSON.stringify(data))
   }
 })
