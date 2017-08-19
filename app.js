@@ -3,6 +3,8 @@ const app = express()
 //REGEX for URL validation
 const re = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
 
+
+
 let data = [
   {
     id: 1234,
@@ -62,4 +64,4 @@ app.get('/new/:url*', function(req, res) {
   }
 })
 
-app.listen(3000)
+app.listen(process.env.PORT)
