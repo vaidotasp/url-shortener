@@ -4,6 +4,7 @@
   "description": "Work in progress...",
   "main": "app.js",
   "scripts": {
+    "start": "app.js",
     "test": "mocha"
   },
   "repository": {
