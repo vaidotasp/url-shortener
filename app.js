@@ -6,27 +6,21 @@ mongoose.Promise = global.Promise
 //REGEX for URL validation
 const re = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
 
-function NewUrl(url) {
-  this.id = Math.floor(1000 + Math.random() * 9000)
-  this.url = url
-  this.output = 'static/' + this.id
-}
-
 app.get('/', function(req, res) {
   //creates a mock data collection
-  mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
-    useMongoClient: true
-  })
-  let srt = new Short({
-    id: Math.floor(1000 + Math.random() * 9000),
-    url: 'www.wooopy.com',
-    output: 'www.static.com/' + '333ID'
-  })
-  srt.save(function(err) {
-    if (err) return err
-    console.log('Saved probably?')
-    //saved
-  })
+  // mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
+  //   useMongoClient: true
+  // })
+  // let srt = new Short({
+  //   id: Math.floor(1000 + Math.random() * 9000),
+  //   url: 'www.wooopy.com',
+  //   output: 'https://vp-url-short.herokuapp.com/' + '333ID'
+  // })
+  // srt.save(function(err) {
+  //   if (err) return err
+  //   console.log('Saved probably?')
+  //   //saved
+  // })
 
   res.send('works')
 })
@@ -68,7 +62,7 @@ app.get('/new/:url*', function(req, res) {
         let newEntry = new Short({
           id: Math.floor(1000 + Math.random() * 9000),
           url: newUrl,
-          output: 'http://www.static.com/' + this.id
+          output: 'https://vp-url-short.herokuapp.com/' + this.id
         })
         //saving newly created instance
         newEntry.save(function(err) {
