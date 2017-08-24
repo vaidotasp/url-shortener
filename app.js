@@ -9,6 +9,7 @@ const app = express()
 const Short = require(__dirname + '/models/urlinstance')
 const mongoose = require('mongoose')
 const helper = require(__dirname + '/modules/helper.js')
+
 mongoose.Promise = global.Promise
 app.use(express.static('public'))
 //REGEX for URL validation
@@ -39,7 +40,6 @@ app.get('/new/:url*', function(req, res) {
     useMongoClient: true
   })
 
-  
   let newUrl = helper.Normalize(req.params)  
   if (!newUrl){throw new Error(newUrl) }
     Short.findOne({ url: newUrl }, function(err, result) {
