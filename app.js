@@ -8,6 +8,8 @@ const express = require('express')
 const app = express()
 const Short = require(__dirname + '/models/urlinstance')
 const mongoose = require('mongoose')
+const helper = require(__dirname + '/modules/helper.js')
+
 mongoose.Promise = global.Promise
 app.use(express.static('public'))
 //REGEX for URL validation
@@ -24,9 +26,10 @@ app.get('/:id', function(req, res) {
   mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
     useMongoClient: true
   })
-  let newId = Number(req.params.id)
+  let newId = req.params.id
   Short.findOne({ id: newId }, function(err, result) {
     if (err) return err
+    console.log("redirection")
     res.redirect(result.output)
   })
 })
@@ -36,19 +39,10 @@ app.get('/new/:url*', function(req, res) {
   mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
     useMongoClient: true
   })
-  let inputUrl = req.params['url'] + req.params['0']
-  function normalizeUrl(input) {
-    if (input[0] === 'w') {
-      return 'http://' + input
-    }
-    return input
-  }
 
-  if (inputUrl.match(re) === null) {
-    throw new Error(inputUrl)
-  } else {
-    let newUrl = normalizeUrl(inputUrl)
-    Short.findOne({ url: inputUrl }, function(err, result) {
+  let newUrl = helper.Normalize(req.params)  
+  if (!newUrl){throw new Error(newUrl) }
+    Short.findOne({ url: newUrl }, function(err, result) {
       if (err) console.log(err)
       if (result === null) {
         console.log('url is not found...')
@@ -80,7 +74,11 @@ app.get('/new/:url*', function(req, res) {
         res.send(output)
       }
     })
-  }
 })
 
+<<<<<<< HEAD
 app.listen(process.env.PORT || 8080)
+=======
+
+app.listen(process.env.PORT || 3000)
+>>>>>>> dc1cde72f45b6cf961824cab6d2b1be22f558bab
