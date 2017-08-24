@@ -1,0 +1,26 @@
+body,
+p,
+h1,
+h2,
+span {
+  font-family: Verdana, sans-serif;
+}
+
+body {
+  background-color: #a8e0c9;
+}
+
+.container {
+  border: 1px black solid;
+  border-radius: 3px;
+  width: 75vh;
+  padding: 15px;
+  margin: 0 auto;
+  margin-top: 30px;
+  background-color: #f2e9df;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 4px;
+}

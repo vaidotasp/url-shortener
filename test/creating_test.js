@@ -1,7 +1,7 @@
 const assert = require('assert')
 const Short = require('../models/urlinstance')
 
-describe('Finding URL instances', function() {
+describe('Creating URL instance based on params', function() {
   let srt
 
   beforeEach(function(done) {
