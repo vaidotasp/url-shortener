@@ -1,7 +1,6 @@
 /*
 TODO:
  - Figure out the .env issue so I can hide the path
- - Use shortid pkg to genera unique short url ids
  - Use mongoose-unique-validator to ipmrove the schema so that short urls are unique
 */
 const express = require('express')
@@ -25,11 +24,8 @@ app.get('/:id', function(req, res) {
     useMongoClient: true
   })
   let newId = req.params.id
-  console.log(typeof newId)
   Short.findOne({ id: newId }, function(err, result) {
     if (err) return err
-    console.log(result)
-    console.log('redirection')
     res.redirect(result.url)
   })
 })
@@ -39,7 +35,6 @@ app.get('/new/:url*', function(req, res) {
   mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
     useMongoClient: true
   })
-  console.log(shortid.generate())
   let newUrl = helper.Normalize(req.params)
   if (!newUrl) {
     throw new Error(newUrl)
@@ -47,7 +42,6 @@ app.get('/new/:url*', function(req, res) {
   Short.findOne({ url: newUrl }, function(err, result) {
     if (err) console.log(err)
     if (result === null) {
-      console.log('url is not found...')
       //creating a new instance -- should probably check if id exists or not
       let newEntry = new Short({
         id: shortid.generate(),
