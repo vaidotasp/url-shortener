@@ -20,7 +20,7 @@ app.get('/', function(req, res) {
 
 //this should handle the redirect of the short URL id only
 app.get('/:id', function(req, res) {
-  mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
+  mongoose.connect(process.env.MLAB, {
     useMongoClient: true
   })
   let newId = req.params.id
@@ -36,7 +36,6 @@ app.get('/:id', function(req, res) {
 
 //This should handle the new URL-Short requests only
 app.get('/new/:url*', function(req, res) {
-  // mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
   mongoose.connect(process.env.MLAB, {
     useMongoClient: true
   })

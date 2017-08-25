@@ -8,7 +8,7 @@ beforeEach(function(done) {
 })
 
 before(function(done) {
-  mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
+  mongoose.connect(process.env.MLAB, {
     useMongoClient: true
   })
   mongoose.connection
