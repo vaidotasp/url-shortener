@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
-const Short = require('../models/urlinstance')
-const shortid = require('shortid')
+// const mongoose = require('mongoose')
+// const Short = require('../models/urlinstance')
+// const shortid = require('shortid')
 
 exports.Normalize = function urlNormalizer(params) {
   let inputUrl = params['url'] + params['0']
@@ -17,6 +17,7 @@ exports.Normalize = function urlNormalizer(params) {
 }
 
 //not a working solution
+/*
 exports.SaveEntry = function(newUrl) {
   mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
     useMongoClient: true
@@ -37,3 +38,4 @@ exports.SaveEntry = function(newUrl) {
       res.send(out)
     })
 }
+*/
