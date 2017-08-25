@@ -26,7 +26,11 @@ app.get('/:id', function(req, res) {
   let newId = req.params.id
   Short.findOne({ id: newId }, function(err, result) {
     if (err) return err
-    res.redirect(result.url)
+    if (result === null) {
+      res.send('Url is not found, use the pattern of /new/www.example')
+    } else {
+      res.redirect(result.url)
+    }
   })
 })
 
