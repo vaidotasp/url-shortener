@@ -27,7 +27,7 @@ app.get('/:id', function(req, res) {
   Short.findOne({ id: newId }, function(err, result) {
     if (err) return err
     if (result === null) {
-      res.send('Url is not found, use the pattern of /new/www.example')
+      res.send('Url is not found, use the pattern of /new/www.example.com')
     } else {
       res.redirect(result.url)
     }
@@ -36,7 +36,8 @@ app.get('/:id', function(req, res) {
 
 //This should handle the new URL-Short requests only
 app.get('/new/:url*', function(req, res) {
-  mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
+  // mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
+  mongoose.connect(process.env.MLAB, {
     useMongoClient: true
   })
   let newUrl = helper.Normalize(req.params)
@@ -47,7 +48,7 @@ app.get('/new/:url*', function(req, res) {
     if (err) console.log(err)
     if (result === null) {
       //creating a new instance -- should probably check if id exists or not
-      mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
+      mongoose.connect(process.env.MLAB, {
         useMongoClient: true
       })
       let newEntry = new Short({
