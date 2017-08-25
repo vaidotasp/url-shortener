@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Short = require(__dirname + '/models/urlinstance')
+const Short = require('../models/urlinstance')
 const shortid = require('shortid')
 
 exports.Normalize = function urlNormalizer(params) {
@@ -16,6 +16,7 @@ exports.Normalize = function urlNormalizer(params) {
   }
 }
 
+//not a working solution
 exports.SaveEntry = function(newUrl) {
   mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
     useMongoClient: true
@@ -29,10 +30,10 @@ exports.SaveEntry = function(newUrl) {
       if (err) console.log('Save Error', err)
     })
     .then(function() {
-      let output = {
+      let out = {
         original_url: newEntry.url,
         short_url: 'https://vp-url-short.herokuapp.com/' + newEntry.id
       }
-      return output
+      res.send(out)
     })
 }

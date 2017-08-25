@@ -43,21 +43,23 @@ app.get('/new/:url*', function(req, res) {
     if (err) console.log(err)
     if (result === null) {
       //creating a new instance -- should probably check if id exists or not
+      mongoose.connect('mongodb://shorturl:whyme@ds157712.mlab.com:57712/url', {
+        useMongoClient: true
+      })
       let newEntry = new Short({
         id: shortid.generate(),
         url: newUrl
       })
-      //saving newly created instance
       newEntry
         .save(function(err) {
-          if (err) console.log('Error: ', err)
+          if (err) console.log('Save Error', err)
         })
         .then(function() {
-          let output = {
+          let out = {
             original_url: newEntry.url,
             short_url: 'https://vp-url-short.herokuapp.com/' + newEntry.id
           }
-          res.send(output)
+          res.send(out)
         })
     } else {
       //Handle if URL already exists in DB
