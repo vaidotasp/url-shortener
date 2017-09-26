@@ -1,8 +1,3 @@
-/*
-TODO:
- - Figure out the .env issue so I can hide the path
- - Use mongoose-unique-validator to ipmrove the schema so that short urls are unique
-*/
 const express = require('express')
 const app = express()
 const Short = require(__dirname + '/models/urlinstance')
@@ -18,7 +13,7 @@ app.get('/', function(req, res) {
   })
 })
 
-//this should handle the redirect of the short URL id only
+//Handle the redirect of the short URL id only
 app.get('/:id', function(req, res) {
   mongoose.connect(process.env.MLAB, {
     useMongoClient: true
@@ -34,7 +29,7 @@ app.get('/:id', function(req, res) {
   })
 })
 
-//This should handle the new URL-Short requests only
+//Handle the new URL-Short requests only
 app.get('/new/:url*', function(req, res) {
   mongoose.connect(process.env.MLAB, {
     useMongoClient: true
