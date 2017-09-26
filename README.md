@@ -1,5 +1,7 @@
 # URL Shortener Microservice - FreeCodeCamp Challenge
 
+https://vp-url-short.herokuapp.com/
+
 ## Specification
 * API accepts any valid URL and provides a shortener version in JSON that can be used to redirect
 * Providing already shortener URL will redirect to the original URL
@@ -13,8 +15,7 @@
 ## Tests done with Mocha:
 `npm test`
 
-### Example Input
-     
+### Example Input   
 `https://vp-url-short.herokuapp.com/new/https://www.google.com`
 `https://vp-url-short.herokuapp.com//new/www.bing.com`
 ### Example output:
